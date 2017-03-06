@@ -1,0 +1,44 @@
+namespace  ar.com.newtechnologies.auditar.hana.data;
+
+@Schema : 'AUDITAR'
+context auditar {
+    type TipoDescripcion : String(100);
+    type TipoObservacion : String(400);
+    type TipoClavePrimaria : Integer64;
+    type TipoClaveForanea : Integer64;
+    type TipoImporte : Decimal(12, 2);
+    type TipoCuotas : Integer;
+    
+    context Rf {
+    
+        @Catalog.tableType: #COLUMN
+        entity Empresa {
+            key EMPRESAID : TipoClavePrimaria;
+            DESCRIPCION : TipoDescripcion;
+        };
+        @Catalog.tableType: #COLUMN
+        entity Marca {
+            key MARCAID : TipoClavePrimaria;
+            DESCRIPCION : TipoDescripcion;
+        };  
+    };
+    context Tx {
+    
+        @Catalog.tableType: #COLUMN
+        entity Cupon {
+            key CUPONID : TipoClavePrimaria;
+            EMPRESAID : Association to Rf.Empresa;
+            MARCAID : Association to Rf.Marca;
+            IMPORTE : TipoImporte;
+            CANTIDADCUOTAS : TipoCuotas;
+            OBSERVACION : TipoObservacion;
+        };
+        @Catalog.tableType: #COLUMN
+        entity Vencimiento {
+            key VENCIMIENTOID : TipoClavePrimaria;
+            CUPONID : Association to Tx.Cupon;
+            NROCUOTA : TipoCuotas;            
+            IMPORTE : TipoImporte;
+        };
+    };
+};

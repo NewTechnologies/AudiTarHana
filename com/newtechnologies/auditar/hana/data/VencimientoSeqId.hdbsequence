@@ -1,0 +1,8 @@
+schema= "AUDITAR";
+start_with= 1;
+maxvalue= 999999999;
+nomaxvalue=false;
+minvalue= 1;
+nominvalue=true;
+cycles= false;
+depends_on_table= "ar.com.newtechnologies.auditar.hana.data::auditar.Tx.Vencimiento";

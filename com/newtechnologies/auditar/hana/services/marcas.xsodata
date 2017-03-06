@@ -1,0 +1,4 @@
+service namespace "ar.com.newtechnologies.auditar.hana.data.services" {
+	"ar.com.newtechnologies.auditar.hana.data::auditar.Rf.Marca"
+	as "Marca"; 
+}
