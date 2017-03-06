@@ -10,7 +10,13 @@ context auditar {
     type TipoCuotas : Integer;
     
     context Rf {
-    
+
+        @Catalog.tableType: #COLUMN
+        entity Pais {
+            key PAISID : TipoClavePrimaria;
+            DESCRIPCION : TipoDescripcion;
+        };
+        
         @Catalog.tableType: #COLUMN
         entity Empresa {
             key EMPRESAID : TipoClavePrimaria;
