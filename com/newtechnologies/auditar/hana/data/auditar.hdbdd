@@ -21,6 +21,7 @@ context auditar {
         entity Empresa {
             key EMPRESAID : TipoClavePrimaria;
             DESCRIPCION : TipoDescripcion;
+            PAISID : Association to Rf.Pais;
         };
         @Catalog.tableType: #COLUMN
         entity Marca {
