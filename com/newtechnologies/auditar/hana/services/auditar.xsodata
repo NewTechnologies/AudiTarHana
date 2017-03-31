@@ -1,9 +1,11 @@
 service namespace "ar.com.newtechnologies.auditar.hana.data.services" {
-	
 	"ar.com.newtechnologies.auditar.hana.data::auditar.Rf.Empresa" as "Empresa"; 
 	"ar.com.newtechnologies.auditar.hana.data::auditar.Rf.Marca" as "Marca"; 
     "ar.com.newtechnologies.auditar.hana.data::auditar.Rf.Pais" as "Pais"; 
     
 	"ar.com.newtechnologies.auditar.hana.data::auditar.Tx.Cupon" as "Cupon";  
 	"ar.com.newtechnologies.auditar.hana.data::auditar.Tx.Vencimiento" as "Vencimiento"; 	
-	}
+}
+annotations {
+   enable OData4SAP;
+}	

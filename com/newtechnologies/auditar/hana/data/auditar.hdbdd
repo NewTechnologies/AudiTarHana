@@ -21,6 +21,9 @@ context auditar {
         entity Empresa {
             key EMPRESAID : TipoClavePrimaria;
             DESCRIPCION : TipoDescripcion;
+            ACTIVA : String(1);
+            TIPO_EMPRESA: String(10);
+            RANKING : Integer;
             PAISID : Association to Rf.Pais;
         };
         @Catalog.tableType: #COLUMN
@@ -29,6 +32,27 @@ context auditar {
             DESCRIPCION : TipoDescripcion;
         };  
     };
+    
+    context RfView {
+
+     define view VtosView as 
+        SELECT 
+            FROM "ar.com.newtechnologies.auditar.hana.data::auditar.Tx.Vencimiento" as v
+            join ("ar.com.newtechnologies.auditar.hana.data::auditar.Tx.Cupon" as c 
+                    join  "ar.com.newtechnologies.auditar.hana.data::auditar.Rf.Empresa" as e on c."EMPRESAID.EMPRESAID" = e.EMPRESAID
+                    join  "ar.com.newtechnologies.auditar.hana.data::auditar.Rf.Marca" as m on c."MARCAID.MARCAID" = m.MARCAID
+                )
+            on v."CUPONID.CUPONID" = c."CUPONID"
+            { 
+                e.DESCRIPCION as EMPRESA_DSC,
+                m.DESCRIPCION as MARCA_DSC,
+                c.CUPONID as CUPON_ID,
+                c.CANTIDADCUOTAS as CANTIDAD_CUOTAS,
+            	v."VENCIMIENTOID" as VTO_ID,
+            	v."NROCUOTA" as NRO_CUOTA,
+            	v."IMPORTE" as IMPORTE};
+    }
+    
     context Tx {
     
         @Catalog.tableType: #COLUMN
