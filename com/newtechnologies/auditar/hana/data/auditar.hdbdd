@@ -8,6 +8,8 @@ context auditar {
     type TipoClaveForanea : Integer64;
     type TipoImporte : Decimal(12, 2);
     type TipoCuotas : Integer;
+    type TipoFecha : LocalDate;
+
     
     context Rf {
 
@@ -48,8 +50,11 @@ context auditar {
                 m.DESCRIPCION as MARCA_DSC,
                 c.CUPONID as CUPON_ID,
                 c.CANTIDADCUOTAS as CANTIDAD_CUOTAS,
+                c.FECHA_OPERACION as FECHA_OPERACION,
             	v."VENCIMIENTOID" as VTO_ID,
             	v."NROCUOTA" as NRO_CUOTA,
+            	v.FECHA_PAGO as FECHA_PAGO,
+            	v.CONCILIACIONID as CONCILIACION_ID,
             	v."IMPORTE" as IMPORTE};
     }
     
@@ -60,6 +65,7 @@ context auditar {
             key CUPONID : TipoClavePrimaria;
             EMPRESAID : Association to Rf.Empresa;
             MARCAID : Association to Rf.Marca;
+            FECHA_OPERACION : TipoFecha;
             IMPORTE : TipoImporte;
             CANTIDADCUOTAS : TipoCuotas;
             OBSERVACION : TipoObservacion;
@@ -68,8 +74,10 @@ context auditar {
         entity Vencimiento {
             key VENCIMIENTOID : TipoClavePrimaria;
             CUPONID : Association to Tx.Cupon;
+            FECHA_PAGO : TipoFecha;
             NROCUOTA : TipoCuotas;            
             IMPORTE : TipoImporte;
+            CONCILIACIONID : TipoClaveForanea;
         };
     };
 };
