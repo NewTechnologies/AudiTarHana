@@ -92,10 +92,11 @@
         var pstmtVto = conn.prepareStatement(query);
 
         for (i = 0; i < 100000; i++) {
+            var conciliado = Math.floor((Math.random() * 10) + 1) % 2;            
             var empresa = Math.floor((Math.random() * 10) + 1) % 2 + 1;            
             var marca = Math.floor((Math.random() * 10) + 1) % 3 + 1;
             var importe = Math.floor((Math.random() * 100) + 1);
-            var anio = Math.floor((Math.random() * 10) + 1)+2006;
+            var anio = Math.floor((Math.random() * 10) + 1) + 2006;
             var mes = Math.floor((Math.random() * 100) + 1) % 12 + 1;
             var dia = Math.floor((Math.random() * 100) + 1) % 28 + 1;
             var anioStr = anio + "";
@@ -114,15 +115,15 @@
             pstmt.setDecimal(4, importe);
             pstmt.setInt(5, 1);
             pstmt.setString(6, "x");
-            pstmt.setDate(7, anioStr+mesStr+diaStr);
+            pstmt.setDate(7, anioStr + mesStr + diaStr);
             pstmt.executeUpdate();
             
             pstmtVto.setInt(1, i);
             pstmtVto.setInt(2, i);
             pstmtVto.setInt(3, 1);
             pstmtVto.setDecimal(4, importe);
-            pstmtVto.setDate(5, anioStr+mesStr+diaStr);
-            pstmtVto.setInt(6, 1);
+            pstmtVto.setDate(5, anioStr + mesStr + diaStr);
+            pstmtVto.setInt(6, conciliado);
             pstmtVto.executeUpdate();
             
         }

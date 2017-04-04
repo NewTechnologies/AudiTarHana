@@ -4,7 +4,11 @@ service namespace "ar.com.newtechnologies.auditar.hana.data.services" {
     "ar.com.newtechnologies.auditar.hana.data::auditar.Rf.Pais" as "Pais"; 
     
 	"ar.com.newtechnologies.auditar.hana.data::auditar.Tx.Cupon" as "Cupon";  
-	"ar.com.newtechnologies.auditar.hana.data::auditar.Tx.Vencimiento" as "Vencimiento"; 	
+	"ar.com.newtechnologies.auditar.hana.data::auditar.Tx.Vencimiento" as "Vencimiento";
+	"ar.com.newtechnologies.auditar.hana.data::auditar.RfView.VtosPteXTarjetaView" as "VtosPteXTarjetaView" 
+	    key generate local "GenID"
+	    aggregates always (SUM of "IMPORTE", SUM of "OPERACIONES");
+    "ar.com.newtechnologies.auditar.hana.data::auditar.RfView.CuponesXAnioView" as "CuponesXAnioView" key generate local "GenID"; 		
 }
 annotations {
    enable OData4SAP;
